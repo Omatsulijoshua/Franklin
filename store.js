@@ -183,6 +183,50 @@ const DEFAULT_PRODUCTS = [
         image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=600&auto=format&fit=crop",
         description: "1080P supported home theater movie projector. Connects via HDMI or USB, built-in dual speakers, adjustable zoom focal lens.",
         status: "in_stock"
+    },
+    {
+        id: "prod-16",
+        name: "Carbon Fiber Helmet",
+        category: "Moto Spare Parts",
+        rating: 5,
+        price: 65000,
+        originalPrice: 80000,
+        image: "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?q=80&w=600&auto=format&fit=crop",
+        description: "Ultra-lightweight aerodynamic carbon fiber motorcycle helmet. High impact safety rated, with dual anti-fog visors.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-17",
+        name: "Performance Spark Plugs (Pack of 4)",
+        category: "Moto Spare Parts",
+        rating: 4,
+        price: 12000,
+        originalPrice: 15000,
+        image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=600&auto=format&fit=crop",
+        description: "Laser iridium spark plugs for optimal ignition performance, improved fuel efficiency, and rapid throttle response.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-18",
+        name: "Heavy Duty Gold Drive Chain",
+        category: "Moto Spare Parts",
+        rating: 5,
+        price: 18000,
+        originalPrice: 24000,
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=600&auto=format&fit=crop",
+        description: "Reinforced O-ring drive chain for high-performance motorbikes. Highly corrosion-resistant with premium gold links.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-19",
+        name: "Ceramic Brake Pads Set",
+        category: "Moto Spare Parts",
+        rating: 4,
+        price: 10000,
+        originalPrice: 13000,
+        image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600&auto=format&fit=crop",
+        description: "Low-dust ceramic brake pads for superior stopping power, quiet braking comfort, and extended rotor wear-life.",
+        status: "in_stock"
     }
 ];
 
@@ -649,6 +693,30 @@ document.getElementById("checkout-submission-form").addEventListener("submit", (
         subtotal += (item.product.price * item.quantity);
         itemsText += `• ${item.quantity} x ${item.product.name} (${settings.currency}${Number(item.product.price * item.quantity).toLocaleString()})\n`;
     });
+
+    // Save order data to local storage for Admin Dashboard Order Manager
+    const savedOrdersStr = localStorage.getItem("franklin_orders");
+    let storeOrders = [];
+    if (savedOrdersStr) {
+        try {
+            storeOrders = JSON.parse(savedOrdersStr);
+        } catch(err) {
+            storeOrders = [];
+        }
+    }
+    const newOrder = {
+        id: "ORD-" + Math.floor(1000 + Math.random() * 9000),
+        date: new Date().toLocaleString(),
+        name: name,
+        phone: phone,
+        address: address,
+        notes: notes,
+        items: cart.map(i => ({ name: i.product.name, qty: i.quantity, price: i.product.price })),
+        total: subtotal,
+        status: "pending"
+    };
+    storeOrders.push(newOrder);
+    localStorage.setItem("franklin_orders", JSON.stringify(storeOrders));
 
     // Format text message
     let whatsappMsg = `*NEW ORDER - ${settings.storeName.toUpperCase()}*\n`;

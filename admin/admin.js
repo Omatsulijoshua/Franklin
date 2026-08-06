@@ -183,12 +183,57 @@ const DEFAULT_PRODUCTS = [
         image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=600&auto=format&fit=crop",
         description: "1080P supported home theater movie projector. Connects via HDMI or USB, built-in dual speakers, adjustable zoom focal lens.",
         status: "in_stock"
+    },
+    {
+        id: "prod-16",
+        name: "Carbon Fiber Helmet",
+        category: "Moto Spare Parts",
+        rating: 5,
+        price: 65000,
+        originalPrice: 80000,
+        image: "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?q=80&w=600&auto=format&fit=crop",
+        description: "Ultra-lightweight aerodynamic carbon fiber motorcycle helmet. High impact safety rated, with dual anti-fog visors.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-17",
+        name: "Performance Spark Plugs (Pack of 4)",
+        category: "Moto Spare Parts",
+        rating: 4,
+        price: 12000,
+        originalPrice: 15000,
+        image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=600&auto=format&fit=crop",
+        description: "Laser iridium spark plugs for optimal ignition performance, improved fuel efficiency, and rapid throttle response.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-18",
+        name: "Heavy Duty Gold Drive Chain",
+        category: "Moto Spare Parts",
+        rating: 5,
+        price: 18000,
+        originalPrice: 24000,
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=600&auto=format&fit=crop",
+        description: "Reinforced O-ring drive chain for high-performance motorbikes. Highly corrosion-resistant with premium gold links.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-19",
+        name: "Ceramic Brake Pads Set",
+        category: "Moto Spare Parts",
+        rating: 4,
+        price: 10000,
+        originalPrice: 13000,
+        image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600&auto=format&fit=crop",
+        description: "Low-dust ceramic brake pads for superior stopping power, quiet braking comfort, and extended rotor wear-life.",
+        status: "in_stock"
     }
 ];
 
 // App State Management
 let products = [];
 let settings = {};
+let orders = [];
 
 // Initialize state
 function init() {
@@ -209,12 +254,22 @@ function init() {
     } else {
         settings = JSON.parse(savedSettings);
     }
+
+    // Check if orders exist in localStorage
+    const savedOrders = localStorage.getItem("franklin_orders");
+    if (!savedOrders) {
+        localStorage.setItem("franklin_orders", JSON.stringify([]));
+        orders = [];
+    } else {
+        orders = JSON.parse(savedOrders);
+    }
 }
 
 // Save state to localStorage
 function saveState() {
     localStorage.setItem("franklin_products", JSON.stringify(products));
     localStorage.setItem("franklin_settings", JSON.stringify(settings));
+    localStorage.setItem("franklin_orders", JSON.stringify(orders));
 }
 
 // Toast System
@@ -255,7 +310,13 @@ function renderDashboard() {
     document.getElementById("stat-total-categories").textContent = categories.size;
     
     // Currency symbol
-    document.getElementById("stat-store-currency").textContent = `${settings.currency || '₦'} (${settings.storeName || 'Prime Store'})`;
+    document.getElementById("stat-store-currency").textContent = `${settings.currency || '₦'} (${settings.storeName || 'Franklin Store'})`;
+    
+    // Total Orders count
+    const totalOrdersEl = document.getElementById("stat-total-orders");
+    if (totalOrdersEl) {
+        totalOrdersEl.textContent = orders.length;
+    }
     
     // Overview Details
     document.getElementById("overview-store-name").textContent = settings.storeName;
@@ -336,6 +397,109 @@ function renderProductsTable(filterQuery = "") {
     });
 }
 
+function renderOrdersTable(filterQuery = "") {
+    const tbody = document.getElementById("orders-table-body");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    const query = filterQuery.toLowerCase().trim();
+    const filteredOrders = orders.filter(o => 
+        o.name.toLowerCase().includes(query) || 
+        o.phone.toLowerCase().includes(query) ||
+        o.id.toLowerCase().includes(query)
+    );
+
+    if (filteredOrders.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 3rem;">
+                    No orders recorded yet. Complete checkouts on the storefront to populate.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    filteredOrders.forEach(order => {
+        const tr = document.createElement("tr");
+
+        // Format items list
+        let itemsHtml = "<ul style='padding-left:1.25rem; font-size:0.8rem; margin:0; color:var(--text-secondary);'>";
+        order.items.forEach(item => {
+            itemsHtml += `<li>${item.qty} x ${item.name} (${settings.currency}${Number(item.price).toLocaleString()})</li>`;
+        });
+        itemsHtml += "</ul>";
+
+        // Status Badge
+        const isCompleted = order.status === "completed";
+        const statusBadge = isCompleted 
+            ? `<span class="badge badge-sale">Completed</span>` 
+            : `<span class="badge badge-regular" style="background-color:rgba(245,158,11,0.15); color:#f59e0b;">Pending</span>`;
+
+        // Toggle button icon
+        const toggleBtnTitle = isCompleted ? "Mark Pending" : "Mark Completed";
+        const toggleIcon = isCompleted 
+            ? `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+            : `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
+
+        tr.innerHTML = `
+            <td>
+                <strong style="color:white; font-family:var(--font-heading);">${order.id}</strong>
+                <span style="display:block; font-size:0.75rem; color:var(--text-muted);">${order.date}</span>
+            </td>
+            <td>
+                <div style="font-weight:600; color:white;">${order.name}</div>
+                <div style="font-size:0.8rem; color:var(--text-secondary);">${order.phone}</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); max-width:220px; white-space:normal; line-height:1.2; margin-top:0.25rem;">${order.address}</div>
+                ${order.notes ? `<div style="font-size:0.75rem; color:#f59e0b; font-style:italic; margin-top:0.25rem;">Note: ${order.notes}</div>` : ""}
+            </td>
+            <td>${itemsHtml}</td>
+            <td><strong>${settings.currency}${Number(order.total).toLocaleString()}</strong></td>
+            <td>${statusBadge}</td>
+            <td>
+                <div class="table-actions">
+                    <button class="action-btn toggle-status" data-id="${order.id}" title="${toggleBtnTitle}">
+                        ${toggleIcon}
+                    </button>
+                    <button class="action-btn delete" data-id="${order.id}" title="Delete Order">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </td>
+        `;
+
+        tr.querySelector(".toggle-status").addEventListener("click", () => toggleOrderStatus(order.id));
+        tr.querySelector(".action-btn.delete").addEventListener("click", () => deleteOrder(order.id));
+
+        tbody.appendChild(tr);
+    });
+}
+
+function toggleOrderStatus(id) {
+    const order = orders.find(o => o.id === id);
+    if (!order) return;
+    order.status = order.status === "completed" ? "pending" : "completed";
+    saveState();
+    renderOrdersTable(document.getElementById("order-search").value);
+    showToast(`Order status updated to "${order.status}"!`);
+}
+
+function deleteOrder(id) {
+    const order = orders.find(o => o.id === id);
+    if (!order) return;
+    
+    if (confirm(`Are you sure you want to delete order reference "${order.id}"?`)) {
+        orders = orders.filter(o => o.id !== id);
+        saveState();
+        renderOrdersTable(document.getElementById("order-search").value);
+        renderDashboard();
+        showToast("Order record deleted successfully!", 'error');
+    }
+}
+
+
 function loadSettingsForm() {
     document.getElementById("settings-store-name").value = settings.storeName || "";
     document.getElementById("settings-currency").value = settings.currency || "";
@@ -372,11 +536,13 @@ document.querySelectorAll(".nav-item").forEach(nav => {
         const titles = {
             dashboard: "Dashboard Overview",
             products: "Products Catalog",
+            orders: "Orders Manager",
             settings: "Store Configuration"
         };
         const subtitles = {
             dashboard: "Track and configure your e-commerce shop state.",
             products: "Add, modify, and delete product catalogs items dynamically.",
+            orders: "View, track, and modify purchase orders made by storefront customers.",
             settings: "Configure branding banners, social parameters, and checkout details."
         };
         document.getElementById("page-title").textContent = titles[targetTab];
@@ -391,6 +557,9 @@ document.querySelectorAll(".nav-item").forEach(nav => {
         if (targetTab === 'dashboard') {
             renderDashboard();
         }
+        if (targetTab === 'orders') {
+            renderOrdersTable();
+        }
     });
 });
 
@@ -398,6 +567,12 @@ document.querySelectorAll(".nav-item").forEach(nav => {
 document.getElementById("product-search").addEventListener("input", (e) => {
     renderProductsTable(e.target.value);
 });
+
+if (document.getElementById("order-search")) {
+    document.getElementById("order-search").addEventListener("input", (e) => {
+        renderOrdersTable(e.target.value);
+    });
+}
 
 // Modals Handling
 const modal = document.getElementById("product-modal");
