@@ -10,9 +10,11 @@ const DEFAULT_SETTINGS = {
     heroWarranty: "Plus ONE YEAR WARRANTY",
     promoBanner: "assets/promo.jpg",
     supportWhatsapp: "+2348000000000",
+    supportPhoneAlt: "+2348099999999",
     supportEmail: "support@franklinstore.com",
     facebookUrl: "https://facebook.com/franklinstore",
     instagramUrl: "https://instagram.com/franklinstore",
+    adminPasscode: "franklin2026",
     description: "Welcome to Franklin Store, your one-stop destination for high-quality products that cater to your everyday needs. We pride ourselves on offering exceptional value, unbeatable deals, and a seamless shopping experience. From fresh groceries to trendy items, we are committed to delivering the best to your doorstep."
 };
 
@@ -346,9 +348,11 @@ function loadSettingsForm() {
     document.getElementById("settings-hero-warranty").value = settings.heroWarranty || "";
     document.getElementById("settings-promo-banner").value = settings.promoBanner || "";
     document.getElementById("settings-support-whatsapp").value = settings.supportWhatsapp || "";
+    document.getElementById("settings-support-phone-alt").value = settings.supportPhoneAlt || "";
     document.getElementById("settings-support-email").value = settings.supportEmail || "";
     document.getElementById("settings-link-facebook").value = settings.facebookUrl || "";
     document.getElementById("settings-link-instagram").value = settings.instagramUrl || "";
+    document.getElementById("settings-admin-passcode").value = settings.adminPasscode || "franklin2026";
 }
 
 // Tab Switching
@@ -509,9 +513,11 @@ document.getElementById("settings-form").addEventListener("submit", (e) => {
     settings.heroWarranty = document.getElementById("settings-hero-warranty").value;
     settings.promoBanner = document.getElementById("settings-promo-banner").value;
     settings.supportWhatsapp = document.getElementById("settings-support-whatsapp").value;
+    settings.supportPhoneAlt = document.getElementById("settings-support-phone-alt").value;
     settings.supportEmail = document.getElementById("settings-support-email").value;
     settings.facebookUrl = document.getElementById("settings-link-facebook").value;
     settings.instagramUrl = document.getElementById("settings-link-instagram").value;
+    settings.adminPasscode = document.getElementById("settings-admin-passcode").value;
 
     saveState();
     renderDashboard();
@@ -522,7 +528,8 @@ document.getElementById("settings-form").addEventListener("submit", (e) => {
 document.getElementById("admin-login-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const password = document.getElementById("login-password").value;
-    if (password === "franklin2026") {
+    const correctPassword = settings.adminPasscode || "franklin2026";
+    if (password === correctPassword) {
         document.getElementById("login-overlay").remove();
         showToast("Access granted. Welcome!");
         sessionStorage.setItem("admin_logged_in", "true");

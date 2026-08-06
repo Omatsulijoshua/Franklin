@@ -280,8 +280,19 @@
                                 <span class="form-help">International format (e.g. +2348012345678) used for chat forwarding.</span>
                             </div>
                             <div class="form-group">
+                                <label for="settings-support-phone-alt">Alternative Phone / Support Line</label>
+                                <input type="text" id="settings-support-phone-alt" placeholder="e.g. +2348099999999">
+                                <span class="form-help">Secondary contact line displayed on the storefront.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
                                 <label for="settings-support-email">Contact Email</label>
-                                <input type="text" id="settings-support-email" required placeholder="info@primestore.com">
+                                <input type="text" id="settings-support-email" required placeholder="info@franklinstore.com">
+                            </div>
+                            <div class="form-group">
+                                <!-- empty -->
                             </div>
                         </div>
 
@@ -294,6 +305,20 @@
                                 <label for="settings-link-instagram">Instagram Profile URL</label>
                                 <input type="url" id="settings-link-instagram" placeholder="https://instagram.com/username">
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section-card">
+                        <h2>
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                            Dashboard Security Settings
+                        </h2>
+                        <div class="form-group">
+                            <label for="settings-admin-passcode">Security Passcode (Access Lock)</label>
+                            <input type="text" id="settings-admin-passcode" required placeholder="franklin2026" style="letter-spacing: 1px;">
+                            <span class="form-help">Passcode required to unlock this admin dashboard. Default is franklin2026.</span>
                         </div>
                     </div>
 

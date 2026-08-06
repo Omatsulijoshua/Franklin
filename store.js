@@ -10,9 +10,11 @@ const DEFAULT_SETTINGS = {
     heroWarranty: "Plus ONE YEAR WARRANTY",
     promoBanner: "assets/promo.jpg",
     supportWhatsapp: "+2348000000000",
+    supportPhoneAlt: "+2348099999999",
     supportEmail: "support@franklinstore.com",
     facebookUrl: "https://facebook.com/franklinstore",
     instagramUrl: "https://instagram.com/franklinstore",
+    adminPasscode: "franklin2026",
     description: "Welcome to Franklin Store, your one-stop destination for high-quality products that cater to your everyday needs. We pride ourselves on offering exceptional value, unbeatable deals, and a seamless shopping experience. From fresh groceries to trendy items, we are committed to delivering the best to your doorstep."
 };
 
@@ -277,6 +279,17 @@ function applyBranding() {
     const whatsappLink = document.getElementById("footer-whatsapp-link");
     if (whatsappLink) {
         whatsappLink.href = `https://wa.me/${settings.supportWhatsapp.replace(/[^0-9]/g, '')}`;
+    }
+
+    // Dynamic Contact List Injection
+    const contactList = document.getElementById("footer-contact-list");
+    if (contactList) {
+        contactList.innerHTML = `
+            <li><span class="footer-link" style="cursor:default;color:#9ea2a7;">📧 Email: ${settings.supportEmail}</span></li>
+            <li><span class="footer-link" style="cursor:default;color:#9ea2a7;">💬 WhatsApp: ${settings.supportWhatsapp}</span></li>
+            ${settings.supportPhoneAlt ? `<li><span class="footer-link" style="cursor:default;color:#9ea2a7;">📞 Alt Phone: ${settings.supportPhoneAlt}</span></li>` : ''}
+            <li><span class="footer-link" style="cursor:default;color:#9ea2a7;">📍 Location: Lagos, Nigeria</span></li>
+        `;
     }
 
     // Copyright
