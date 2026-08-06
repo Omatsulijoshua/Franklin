@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Console - Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- PASSCODE LOGIN OVERLAY -->
+    <div id="login-overlay" class="modal-overlay active" style="z-index: 10000; pointer-events: auto; display: flex; align-items: center; justify-content: center; background-color: var(--bg-primary);">
+        <div class="modal-container" style="max-width: 400px; padding: 2.5rem; text-align: center; border: 1px solid var(--border-color); background-color: var(--bg-secondary);">
+            <div class="logo-icon" style="margin: 0 auto 1.5rem auto; width: 48px; height: 48px; font-size:1.5rem; background: linear-gradient(135deg, var(--accent-color), var(--accent-success)); font-weight:700; color:white; border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading);">F</div>
+            <h2 style="font-family: var(--font-heading); margin-bottom: 0.5rem; color: white;">Franklin Store</h2>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 2rem;">Enter security password to access merchant console.</p>
+            <form id="admin-login-form">
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <input type="password" id="login-password" required placeholder="Security Password" style="text-align: center; font-size: 1.1rem; letter-spacing: 1px; padding: 0.75rem; color:white; background-color:var(--bg-primary); border:1px solid var(--border-color); border-radius:8px; width:100%;">
+                    <span id="login-error" style="color: var(--accent-danger); font-size: 0.8rem; display: none; margin-top: 0.5rem; font-weight:500;">Incorrect password. Try again!</span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; cursor:pointer;">Log In</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">F</div>
+                <div class="logo-text">Franklin Admin</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-item active" data-tab="dashboard">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"></path>
+                    </svg>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" data-tab="products">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                    <span>Products Manager</span>
+                </div>
+                <div class="nav-item" data-tab="settings">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>Store Settings</span>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="../index.html" class="back-to-store-btn">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    <span>View Storefront</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-title">
+                    <h1 id="page-title">Dashboard Overview</h1>
+                    <p id="page-subtitle">Track and configure your e-commerce shop state.</p>
+                </div>
+                <div class="header-actions">
+                    <!-- Dynamic back indicator on mobile -->
+                </div>
+            </header>
+
+            <!-- STATS CARDS GRID -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Products</h3>
+                        <p id="stat-total-products">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Categories</h3>
+                        <p id="stat-total-categories">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 8h6m-6 2h6m-6 2h6m-2-8H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-5l-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Store Mode</h3>
+                        <p id="stat-store-currency">₦ (Naira)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: DASHBOARD -->
+            <div id="tab-dashboard" class="tab-content active">
+                <div class="settings-section-card">
+                    <h2>
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Welcome to Prime Admin Dashboard
+                    </h2>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary);">Manage your e-commerce products and website branding parameters easily from this dashboard. Changes will be updated dynamically in local storage and reflected in the customer storefront immediately.</p>
+                    <p style="color:var(--text-secondary); line-height: 1.6;">
+                        <strong>Key features:</strong><br>
+                        • Create, Edit, or Delete items inside the <strong>Products Manager</strong> tab.<br>
+                        • Modify your store title, tagline, currency symbol, social links, and images in <strong>Store Settings</strong>.<br>
+                        • Customer checkout order lists can simulate automatic redirections to WhatsApp chats with pre-filled message text.
+                    </p>
+                </div>
+                
+                <div class="settings-section-card">
+                    <h2>Active Branding Overview</h2>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; color: var(--text-secondary);">
+                        <div>
+                            <span style="font-size:0.75rem; text-transform:uppercase; display:block; margin-bottom:0.25rem;">Store Name</span>
+                            <strong id="overview-store-name" style="color:white; font-size:1.15rem;">Prime Store</strong>
+                        </div>
+                        <div>
+                            <span style="font-size:0.75rem; text-transform:uppercase; display:block; margin-bottom:0.25rem;">Support Line</span>
+                            <strong id="overview-support-phone" style="color:white; font-size:1.15rem;">+234...</strong>
+                        </div>
+                        <div>
+                            <span style="font-size:0.75rem; text-transform:uppercase; display:block; margin-bottom:0.25rem;">Hero Heading</span>
+                            <strong id="overview-hero-heading" style="color:white; font-size:1.15rem;">Prime Store</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: PRODUCTS -->
+            <div id="tab-products" class="tab-content">
+                <div class="action-controls">
+                    <div class="search-wrapper">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="product-search" class="search-input" placeholder="Search products by name or category...">
+                    </div>
+                    <button class="btn btn-primary" id="open-add-modal-btn">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add Product
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Details</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Sale Details</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB: SETTINGS -->
+            <div id="tab-settings" class="tab-content">
+                <form id="settings-form">
+                    <div class="settings-section-card">
+                        <h2>
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                            General Store Settings
+                        </h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="settings-store-name">Store Name</label>
+                                <input type="text" id="settings-store-name" required>
+                                <span class="form-help">Appears in header, footer and page title.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-currency">Currency Code/Symbol</label>
+                                <input type="text" id="settings-currency" required placeholder="₦">
+                                <span class="form-help">Currency displayed before product prices. E.g. ₦, $, €, £.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settings-store-logo">Store Logo Image (URL)</label>
+                            <input type="url" id="settings-store-logo" required placeholder="https://example.com/logo.png">
+                            <span class="form-help">Must be a valid web image URL. Recommended dimensions: 200x80 pixels.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settings-store-description">Footer About Description</label>
+                            <textarea id="settings-store-description" required rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-section-card">
+                        <h2>
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Hero Banner Settings
+                        </h2>
+
+                        <div class="form-group">
+                            <label for="settings-hero-bg">Hero Background Image (URL)</label>
+                            <input type="url" id="settings-hero-bg" required placeholder="https://example.com/hero.jpg">
+                            <span class="form-help">High-resolution banner photo showing store catalog.</span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="settings-hero-title">Hero Main Heading</label>
+                                <input type="text" id="settings-hero-title" required placeholder="Prime Store">
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-hero-subtitle">Hero Subtitle / Description</label>
+                                <input type="text" id="settings-hero-subtitle" required placeholder="It has finally started...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="settings-hero-tag">Discount Promo Subtext</label>
+                                <input type="text" id="settings-hero-tag" required placeholder="Huge Sales up to 50% Off">
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-hero-warranty">Warranty / Accent Text</label>
+                                <input type="text" id="settings-hero-warranty" required placeholder="Plus ONE YEAR WARRANTY">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settings-promo-banner">Store Center Promotional Graphic (URL)</label>
+                            <input type="url" id="settings-promo-banner" required placeholder="https://example.com/promo.jpg">
+                            <span class="form-help">Large centered banner block separating product lists (like 'Online Shopping Order Now').</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-section-card">
+                        <h2>
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 00.996.86h1.11a1 1 0 00.996-.86l.548-2.2A1 1 0 0116.16 3H19a2 2 0 012 2v3a2 2 0 002 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Merchant Support Contacts
+                        </h2>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="settings-support-whatsapp">WhatsApp Phone Number</label>
+                                <input type="text" id="settings-support-whatsapp" required placeholder="+2348000000000">
+                                <span class="form-help">International format (e.g. +2348012345678) used for chat forwarding.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-support-email">Contact Email</label>
+                                <input type="text" id="settings-support-email" required placeholder="info@primestore.com">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="settings-link-facebook">Facebook Profile / Page URL</label>
+                                <input type="url" id="settings-link-facebook" placeholder="https://facebook.com/username">
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-link-instagram">Instagram Profile URL</label>
+                                <input type="url" id="settings-link-instagram" placeholder="https://instagram.com/username">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-save-bar">
+                        <button type="submit" class="btn btn-primary">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                            </svg>
+                            Save Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: ADD / EDIT PRODUCT -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title">Add New Product</h2>
+                <button class="modal-close" id="close-modal-btn">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="prod-name">Product Title</label>
+                        <input type="text" id="prod-name" required placeholder="Mandolin Slicer">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prod-category">Category</label>
+                            <select id="prod-category" required>
+                                <option value="Household Products">Household Products</option>
+                                <option value="Kitchen Items">Kitchen Items</option>
+                                <option value="Electronic Gadgets">Electronic Gadgets</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prod-rating">Star Rating (1 - 5)</label>
+                            <select id="prod-rating" required>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="2">2 Stars</option>
+                                <option value="1">1 Star</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prod-price">Selling Price (Number Only)</label>
+                            <input type="number" id="prod-price" required placeholder="25000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="prod-original-price">Original Price (For Discount Strikethrough)</label>
+                            <input type="number" id="prod-original-price" placeholder="30000" min="0">
+                            <span class="form-help">Leave empty for no sale badge.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-image">Product Image URL</label>
+                        <input type="url" id="prod-image" required placeholder="https://example.com/product.jpg">
+                        <span class="form-help">Web image URL (absolute path).</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-desc">Description</label>
+                        <textarea id="prod-desc" required placeholder="Explain features, specs, and contents of package..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-status">Stock Status</label>
+                        <select id="prod-status" required>
+                            <option value="in_stock">In Stock</option>
+                            <option value="low_stock">Low Stock</option>
+                            <option value="out_of_stock">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-product-btn">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

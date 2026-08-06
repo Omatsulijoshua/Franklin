@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>primestore - Buy Household, Kitchen & Electronics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <!-- Top Branding Bar -->
+        <div class="top-bar">
+            <a href="index.html" class="logo-container">
+                <img id="store-logo-img" src="assets/logo.png" alt="Prime Store Shopping Logo" class="store-logo">
+                <h1 id="store-name-text" class="store-name">primestore</h1>
+            </a>
+        </div>
+        
+        <!-- Navigation & Cart Status Bar -->
+        <div class="navigation-bar">
+            <nav>
+                <ul class="nav-links">
+                    <li><span class="nav-link active" data-category="all">Shop</span></li>
+                    <li><span class="nav-link" data-category="Household Products">Household Products</span></li>
+                    <li><span class="nav-link" data-category="Kitchen Items">Kitchen Items</span></li>
+                    <li><span class="nav-link" data-category="Electronic Gadgets">Electronic Gadgets</span></li>
+                </ul>
+            </nav>
+            
+            <button class="header-cart-summary" id="cart-trigger-btn">
+                <span class="cart-price-tag" id="cart-total-price">₦0.00</span>
+                <div class="cart-icon-wrapper">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 18a2 2 0 110 4 2 2 0 010-4zM7 18a2 2 0 110 4 2 2 0 010-4zM2.005 3h3.5l1.68 7.42-1.09.99A3 3 0 008.2 16.5h10.3v-2H8.2a1 1 0 01-.7-.3l.05-.05 1.15-1.05h6.6a3 3 0 002.7-1.7l3.85-7a1 1 0 00-.9-1.5H6.22l-1.12-5H2.005v2z"></path>
+                    </svg>
+                    <span class="cart-badge" id="cart-qty-badge">0</span>
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Hero Banner Section -->
+    <section class="hero-section" id="hero-banner-section" style="background-image: url('assets/hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle" id="hero-subtitle-text">It has finally started...</p>
+            <h2 class="hero-title" id="hero-title-text">Prime Store</h2>
+            <p class="hero-discount" id="hero-discount-text">Huge Sales up to 50% Off</p>
+            <p class="hero-warranty" id="hero-warranty-text">Plus ONE YEAR WARRANTY</p>
+            <button class="hero-btn" id="hero-cta-btn">Shop Now</button>
+        </div>
+    </section>
+
+    <!-- Promotional Centered Banner -->
+    <section class="promo-banner-container">
+        <img id="promo-banner-graphic" src="assets/promo.jpg" alt="Online Shopping Order Now Promo" class="promo-banner-img">
+    </section>
+
+    <!-- Product Grid Section -->
+    <section class="collection-title-container">
+        <h3 class="collection-title" id="category-heading-text">Best Selling Products Collection</h3>
+    </section>
+
+    <div class="products-container">
+        <div class="products-grid" id="storefront-products-grid">
+            <!-- Dynamically populated by store.js -->
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-grid">
+            <!-- Column 1: Store Bio -->
+            <div class="footer-about-col">
+                <a href="index.html" class="footer-logo-container">
+                    <img id="footer-logo-img" src="assets/logo.png" alt="Footer Logo" class="footer-logo-img">
+                    <span id="footer-store-name" class="footer-logo-text">primestore</span>
+                </a>
+                <p id="footer-about-description" class="footer-description">
+                    Welcome to Prime Store, your one-stop destination for high-quality products that cater to your everyday needs. We pride ourselves on offering exceptional value, unbeatable deals, and a seamless shopping experience.
+                </p>
+            </div>
+            
+            <!-- Column 2: Stay Connected (Social Links) -->
+            <div>
+                <h4 class="footer-col-title">Stay Connected</h4>
+                <div class="footer-links-list">
+                    <p style="margin-bottom:0.5rem;">Follow us on social media and subscribe to our newsletter for the latest updates, exclusive discounts, and special offers.</p>
+                    <div class="social-links-wrapper">
+                        <a href="#" id="footer-facebook-link" target="_blank" class="social-link-item">
+                            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"></path>
+                            </svg>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="#" id="footer-whatsapp-link" target="_blank" class="social-link-item">
+                            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M12.004 2C6.48 2 2.001 6.477 2.001 12c0 1.892.527 3.66 1.446 5.176L2 22l5.003-1.312A9.957 9.957 0 0012.004 22c5.52 0 10-4.477 10-10s-4.48-10-10-10zm5.66 14.156c-.23.639-1.159 1.169-1.636 1.23-.42.054-.972.072-2.58-.592-2.056-.85-3.354-2.923-3.456-3.059-.102-.136-.83-.997-.83-1.992 0-.995.527-1.48.715-1.685.188-.205.41-.256.547-.256.136 0 .272.002.39.008.125.006.29-.024.453.37.17.41.58 1.428.631 1.53.05.102.085.22.017.357-.068.136-.102.22-.204.341-.102.12-.215.267-.307.358-.102.102-.21.213-.09.42.12.204.53.878.14 1.83 1.135.547.417.898.81.996.9.098.085.204.17.204.085 0-.085-.374-.868-.51-1.174-.136-.307-.272-.256-.374-.256-.09 0-.195-.01-.3-.01-.102 0-.272.038-.41.188-.135.15-.527.512-.527 1.246 0 .734.537 1.44.61 1.542.074.102 1.058 1.616 2.564 2.261.358.154.639.246.858.316.36.113.687.097.947.058.29-.043.896-.367 1.02-.72.124-.354.124-.658.087-.72-.037-.063-.136-.102-.272-.17z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 3: Contact Us -->
+            <div>
+                <h4 class="footer-col-title">Contact Us</h4>
+                <ul class="footer-links-list">
+                    <li><span class="footer-link">Know More About Us</span></li>
+                    <li><span class="footer-link">Visit Store</span></li>
+                    <li><span class="footer-link">Let's Connect</span></li>
+                    <li><span class="footer-link">Locate Stores</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Bottom copyright and admin shortcut link -->
+        <div class="footer-bottom">
+            <p class="copyright-text" id="footer-copyright-text">Copyright © 2026 primestore. All rights reserved.</p>
+            <a href="admin/index.html" class="footer-back-admin-btn">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>Merchant Dashboard</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- SLIDE DRAWERS: CART -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <h2>Shopping Cart</h2>
+                <button class="cart-drawer-close" id="close-cart-btn">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Cart items scroller -->
+            <div class="cart-items-list" id="cart-items-container">
+                <!-- Dynamically populated or empty state -->
+            </div>
+            
+            <!-- Cart pricing totalizer footer -->
+            <div class="cart-footer">
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal-val">₦0.00</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Shipping</span>
+                    <span style="color: var(--primary-color); font-weight:600;">FREE</span>
+                </div>
+                <div class="cart-summary-row total">
+                    <span>Total</span>
+                    <span id="cart-total-val">₦0.00</span>
+                </div>
+                <button class="btn-checkout" id="checkout-trigger-btn" style="margin-top: 1rem;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- OVERLAY MODAL: PRODUCT DETAILS -->
+    <div class="modal-overlay" id="product-detail-modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="close-details-btn">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <div class="product-modal-body">
+                <!-- Left panel image -->
+                <div class="modal-image-panel">
+                    <img id="detail-modal-img" src="" alt="Product Image">
+                </div>
+                <!-- Right panel detailed specifications -->
+                <div class="modal-details-panel">
+                    <span class="modal-category" id="detail-modal-category">Category</span>
+                    <h3 class="modal-title" id="detail-modal-title">Product Title</h3>
+                    <div class="product-rating modal-rating" id="detail-modal-rating">
+                        <!-- stars -->
+                    </div>
+                    <div class="modal-price-row">
+                        <span class="modal-price" id="detail-modal-price">₦0.00</span>
+                        <span class="modal-original-price" id="detail-modal-original-price">₦0.00</span>
+                    </div>
+                    <p class="modal-description" id="detail-modal-desc">
+                        Product detailed features descriptions go here. Explaining sizes, builds, packages items.
+                    </p>
+                    
+                    <div class="modal-action-row">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="modal-qty-minus">-</button>
+                            <input type="text" class="qty-input" id="modal-qty-input" value="1" readonly>
+                            <button class="qty-btn" id="modal-qty-plus">+</button>
+                        </div>
+                        <button class="btn-modal-add" id="modal-add-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OVERLAY MODAL: CHECKOUT ADDRESS DETAILS -->
+    <div class="modal-overlay" id="checkout-form-modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close-btn" id="close-checkout-form-btn">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <form id="checkout-submission-form">
+                <div class="checkout-form-body">
+                    <h2>Delivery Details</h2>
+                    <p style="font-size:0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Enter your shipping info. We will redirect you to WhatsApp to finalize payment and dispatch details.</p>
+                    
+                    <div class="checkout-group">
+                        <label for="check-name">Recipient Full Name</label>
+                        <input type="text" id="check-name" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="checkout-group">
+                        <label for="check-phone">Contact Phone Number</label>
+                        <input type="text" id="check-phone" required placeholder="e.g. +2348031234567">
+                    </div>
+                    
+                    <div class="checkout-group">
+                        <label for="check-address">Delivery Address</label>
+                        <textarea id="check-address" required rows="3" placeholder="Street Address, City, State"></textarea>
+                    </div>
+                    
+                    <div class="checkout-group">
+                        <label for="check-notes">Order Notes (Optional)</label>
+                        <input type="text" id="check-notes" placeholder="Color, delivery instructions...">
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 1.25rem 2rem; display: flex; justify-content: flex-end; gap: 0.75rem; border-top: 1px solid var(--border-color); background-color: #faf9f6;">
+                    <button type="button" class="hero-btn" id="cancel-checkout-btn" style="background-color: transparent; border: 1px solid var(--border-color); color: var(--text-dark); box-shadow:none;">Cancel</button>
+                    <button type="submit" class="hero-btn" style="background-color: #25d366; box-shadow:none;">Send via WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dynamic Toast Alerts Storefront -->
+    <div class="toast-msg-container" id="storefront-toast-container"></div>
+
+    <script src="store.js"></script>
+</body>
+</html>
