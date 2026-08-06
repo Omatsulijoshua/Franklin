@@ -227,6 +227,50 @@ const DEFAULT_PRODUCTS = [
         image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600&auto=format&fit=crop",
         description: "Low-dust ceramic brake pads for superior stopping power, quiet braking comfort, and extended rotor wear-life.",
         status: "in_stock"
+    },
+    {
+        id: "prod-20",
+        name: "Performance Engine Air Filter",
+        category: "Cars Spare Parts",
+        rating: 5,
+        price: 15000,
+        originalPrice: 20000,
+        image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=600&auto=format&fit=crop",
+        description: "High-flow washable engine cold air intake filter. Improves horsepower, torque, and throttle response.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-21",
+        name: "LED Headlight Conversion Kit (H7)",
+        category: "Cars Spare Parts",
+        rating: 4,
+        price: 28000,
+        originalPrice: 35000,
+        image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop",
+        description: "Super bright LED headlight bulbs conversion kit. 12000 lumens, 6500K cool white, IP67 waterproof rating.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-22",
+        name: "Brembo Ceramic Brake Discs (Pair)",
+        category: "Cars Spare Parts",
+        rating: 5,
+        price: 95000,
+        originalPrice: 120000,
+        image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600&auto=format&fit=crop",
+        description: "Drilled and slotted performance front brake rotors for maximum heat dissipation and thermal comfort.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-23",
+        name: "OBD2 Engine Scanner Diagnostic Tool",
+        category: "Cars Spare Parts",
+        rating: 4,
+        price: 18000,
+        originalPrice: 25000,
+        image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600&auto=format&fit=crop",
+        description: "Universal car OBD2 code reader diagnostic scanner. Quickly reads and clears engine trouble codes.",
+        status: "in_stock"
     }
 ];
 
