@@ -6,6 +6,7 @@ let products = [];
 let settings = {};
 let cart = [];
 let currentCategory = "all";
+let currentStateFilter = "all";
 let activeDetailProduct = null;
 
 // Initialize Store Database
@@ -36,6 +37,7 @@ function initStore() {
 
     applyBranding();
     renderCategoriesNav();
+    renderStateFilterOptions();
     renderProductsGrid();
     updateCartUI();
 }
@@ -69,6 +71,30 @@ function renderCategoriesNav() {
             }
         });
     });
+}
+
+function renderStateFilterOptions() {
+    const select = document.getElementById("store-state-filter");
+    if (!select) return;
+    
+    // Gather unique states/locations
+    const states = Array.from(new Set(products.map(p => p.location || "Lagos"))).filter(Boolean);
+    
+    let html = `<option value="all" style="background:#121824; color:white;">All Locations</option>`;
+    states.forEach(state => {
+        const val = state.toLowerCase();
+        html += `<option value="${val}" ${currentStateFilter === val ? 'selected' : ''} style="background:#121824; color:white;">${state}</option>`;
+    });
+    select.innerHTML = html;
+
+    // Attach change event listener
+    if (!select.dataset.listenerAttached) {
+        select.addEventListener("change", (e) => {
+            currentStateFilter = e.target.value;
+            renderProductsGrid();
+        });
+        select.dataset.listenerAttached = "true";
+    }
 }
 
 
@@ -167,9 +193,14 @@ function renderProductsGrid() {
     const grid = document.getElementById("storefront-products-grid");
     grid.innerHTML = "";
 
-    const filtered = currentCategory === "all" 
+    let filtered = currentCategory === "all" 
         ? products 
         : products.filter(p => p.category === currentCategory);
+
+    // Apply location state filter
+    if (currentStateFilter !== "all") {
+        filtered = filtered.filter(p => (p.location || "Lagos").toLowerCase() === currentStateFilter.toLowerCase());
+    }
 
     // Update section title text
     const heading = document.getElementById("category-heading-text");
@@ -180,7 +211,7 @@ function renderProductsGrid() {
     }
 
     if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">No products found in this category.</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">No products found in this category / location.</div>`;
         return;
     }
 
@@ -204,7 +235,13 @@ function renderProductsGrid() {
                 <img class="product-img" src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/300x300/e2e8f0/1e293b?text=PRIME+PRODUCT'">
             </div>
             <div class="product-details">
-                <span class="product-category">${product.category}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.25rem;">
+                    <span class="product-category" style="margin:0;">${product.category}</span>
+                    <span style="font-size:0.75rem; color:var(--text-muted); display:inline-flex; align-items:center; gap:0.2rem; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:4px;">
+                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:12px; height:12px; vertical-align:middle; opacity:0.7;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        ${product.location || "Lagos"}
+                    </span>
+                </div>
                 <h4 class="product-name">${product.name}</h4>
                 <div class="product-rating">${starsHtml}</div>
                 <div class="product-price-row">

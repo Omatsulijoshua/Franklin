@@ -28,7 +28,8 @@ const DEFAULT_PRODUCTS = [
         originalPrice: 35000,
         image: "assets/product_popcorn.jpg",
         description: "Hot air popcorn popper machine. Prepares oil-free healthy snacks in under 3 minutes with high popcorn yield rates.",
-        status: "in_stock"
+        status: "in_stock",
+        location: "Lagos"
     },
     {
         id: "prod-2",
@@ -39,7 +40,8 @@ const DEFAULT_PRODUCTS = [
         originalPrice: 24000,
         image: "assets/product_slicer.jpg",
         description: "Multi-blade vegetable slicer, shredder and grater tool with hand guards. Essential tool to speed up meal prepping.",
-        status: "in_stock"
+        status: "in_stock",
+        location: "Lagos"
     },
     {
         id: "prod-3",
@@ -50,7 +52,8 @@ const DEFAULT_PRODUCTS = [
         originalPrice: 60000,
         image: "assets/product_juicer.jpg",
         description: "Powerful high-speed electric juicer machine with wide mouth feed chute. Extracts pulp-free vitamins from fruits & veggies.",
-        status: "in_stock"
+        status: "in_stock",
+        location: "Abuja"
     },
     {
         id: "prod-4",
@@ -61,7 +64,8 @@ const DEFAULT_PRODUCTS = [
         originalPrice: 40000,
         image: "assets/product_cutter.jpg",
         description: "Heavy-duty electric kitchen cutter and bone saw tool. Cuts through frozen meat, bones and tough foods cleanly.",
-        status: "in_stock"
+        status: "in_stock",
+        location: "Abuja"
     },
     {
         id: "prod-5",
@@ -72,7 +76,8 @@ const DEFAULT_PRODUCTS = [
         originalPrice: 28000,
         image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=600&auto=format&fit=crop",
         description: "Compact double-sided heating waffle iron maker. Non-stick plates ensure easy release and rapid cleanups.",
-        status: "in_stock"
+        status: "in_stock",
+        location: "Rivers"
     },
     {
         id: "prod-6",
@@ -83,7 +88,8 @@ const DEFAULT_PRODUCTS = [
         originalPrice: 22000,
         image: "https://images.unsplash.com/photo-1594051808688-7f6ff98d279b?q=80&w=600&auto=format&fit=crop",
         description: "1.7L rapid boil hot water electric kettle with automatic shutoff and boil-dry safety protection indicators.",
-        status: "in_stock"
+        status: "in_stock",
+        location: "Rivers"
     },
     {
         id: "prod-7",

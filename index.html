@@ -38,16 +38,21 @@
                     <li><span class="nav-link active" data-category="all">Shop</span></li>
                 </ul>
             </nav>
-            
-            <button class="header-cart-summary" id="cart-trigger-btn">
-                <span class="cart-price-tag" id="cart-total-price">₦0.00</span>
-                <div class="cart-icon-wrapper">
-                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 18a2 2 0 110 4 2 2 0 010-4zM7 18a2 2 0 110 4 2 2 0 010-4zM2.005 3h3.5l1.68 7.42-1.09.99A3 3 0 008.2 16.5h10.3v-2H8.2a1 1 0 01-.7-.3l.05-.05 1.15-1.05h6.6a3 3 0 002.7-1.7l3.85-7a1 1 0 00-.9-1.5H6.22l-1.12-5H2.005v2z"></path>
-                    </svg>
-                    <span class="cart-badge" id="cart-qty-badge">0</span>
-                </div>
-            </button>
+            <div class="header-right-controls" style="display:flex; align-items:center; gap:0.75rem;">
+                <select id="store-state-filter" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: white; padding: 0.4rem 0.8rem; border-radius: 6px; font-family: var(--font-body); font-size: 0.85rem; cursor: pointer; outline: none; transition: all 0.2s;">
+                    <option value="all" style="background:#121824; color:white;">All Locations</option>
+                </select>
+
+                <button class="header-cart-summary" id="cart-trigger-btn">
+                    <span class="cart-price-tag" id="cart-total-price">₦0.00</span>
+                    <div class="cart-icon-wrapper">
+                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 18a2 2 0 110 4 2 2 0 010-4zM7 18a2 2 0 110 4 2 2 0 010-4zM2.005 3h3.5l1.68 7.42-1.09.99A3 3 0 008.2 16.5h10.3v-2H8.2a1 1 0 01-.7-.3l.05-.05 1.15-1.05h6.6a3 3 0 002.7-1.7l3.85-7a1 1 0 00-.9-1.5H6.22l-1.12-5H2.005v2z"></path>
+                        </svg>
+                        <span class="cart-badge" id="cart-qty-badge">0</span>
+                    </div>
+                </button>
+            </div>
         </div>
     </header>
 

@@ -144,7 +144,13 @@ function renderProductsTable(filterQuery = "") {
                     </div>
                 </div>
             </td>
-            <td><span style="color: var(--text-secondary);">${product.category}</span></td>
+            <td>
+                <span style="color: var(--text-secondary);">${product.category}</span>
+                <br>
+                <span style="font-size:0.75rem; color:var(--text-muted); display:inline-flex; align-items:center; gap:2px; margin-top:2px;">
+                    <i style="font-style:normal;">📍</i>${product.location || "Lagos"}
+                </span>
+            </td>
             <td>
                 <strong>${settings.currency}${Number(product.price).toLocaleString()}</strong>
                 ${originalPriceDisplay}
@@ -365,6 +371,9 @@ function openModal(isEdit = false) {
     document.getElementById("modal-title").textContent = isEdit ? "Modify Product Details" : "Add New Product";
     document.getElementById("save-product-btn").textContent = isEdit ? "Save Changes" : "Create Product";
     modal.classList.add("active");
+    if (!isEdit) {
+        document.getElementById("prod-location").value = "Lagos";
+    }
 }
 
 function closeModal() {
@@ -393,12 +402,13 @@ productForm.addEventListener("submit", (e) => {
     const image = document.getElementById("prod-image").value;
     const description = document.getElementById("prod-desc").value;
     const status = document.getElementById("prod-status").value;
+    const location = document.getElementById("prod-location").value;
 
     if (id) {
         // Edit existing product
         const prodIndex = products.findIndex(p => p.id === id);
         if (prodIndex > -1) {
-            products[prodIndex] = { id, name, category, rating, price, originalPrice, image, description, status };
+            products[prodIndex] = { id, name, category, rating, price, originalPrice, image, description, status, location };
             showToast(`Product "${name}" updated successfully!`);
         }
     } else {
@@ -412,7 +422,8 @@ productForm.addEventListener("submit", (e) => {
             originalPrice,
             image,
             description,
-            status
+            status,
+            location
         };
         products.push(newProduct);
         showToast(`Product "${name}" created successfully!`);
@@ -438,6 +449,7 @@ function editProduct(id) {
     document.getElementById("prod-image").value = product.image;
     document.getElementById("prod-desc").value = product.description;
     document.getElementById("prod-status").value = product.status || "in_stock";
+    document.getElementById("prod-location").value = product.location || "Lagos";
 
     openModal(true);
 }
