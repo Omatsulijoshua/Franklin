@@ -7,30 +7,76 @@ Franklin Store is a premium, fully responsive, client-side e-commerce web applic
 ## 🔑 Admin Console Credentials
 
 To manage products and store configurations, navigate to the dashboard folder:
-* **Dashboard URL**: `/admin/index.html` (or click "Merchant Dashboard" in the storefront footer)
-* **Security Passcode**: `franklin2026`
+* **Dashboard URL**: `/admin/index.html` (or click **Merchant Dashboard** in the storefront footer)
+* **Default Security Passcode**: `franklin2026`
 
 > [!IMPORTANT]
 > The admin page is protected with a full-screen glassmorphic passcode check. Access to dashboard metrics, products list operations, and configurations forms is locked until the merchant types the correct passcode. Session memory persists access so you do not have to retype it on reload.
 
 ---
 
-## ✨ Features
+## ⚙️ Merchant Admin Management & Controls
 
-### 🛒 Customer Storefront
-* **15 Seeded Products**: Fully loaded inventory matching Kitchen, Electronics, and Household categories with beautiful Unsplash and custom-generated photography.
-* **Sticky Navigation & Header**: Clean header with backdrop blurring (`backdrop-filter`) and real-time shopping cart bubble.
-* **Mobile-First Ribbon**: On mobile screens, category list tabs condense into a clean horizontally-scrollable ribbon, and the cart button floats dynamically in the top-right corner to save screen estate.
-* **Product Quick Views**: Detail previews inside a structured modal containing detail specs and local quantity selectors.
-* **WhatsApp Dispatch Order Checkout**: A checkout drawer form that formats recipient shipping info and cart items into a clean, markdown-friendly text message, opening it in WhatsApp to finalize delivery:
-  * *WhatsApp Dispatch supports international number redirection configurations inside Settings.*
+The Merchant Console is divided into four main functional areas: **Dashboard Overview**, **Products Manager**, **Orders Manager**, and **Store Settings**.
 
-### ⚙️ Merchant Dashboard
-* **Metrics Dashboard**: Analytics counters showing total catalog listings, categories counts, and active currency symbols.
-* **Searchable Inventories**: Live filter search bar to lookup products by title or category.
-* **Interactive CRUD Manager**: Complete interface to Add, Edit, or Delete catalog products. Form inputs handle name, categories, sale prices, original prices (for "Sale!" bubble toggles), description, and stock statuses.
-* **Branding Configurator**: Complete form to customize store name, active currency symbols, WhatsApp forwarding numbers, social links (Facebook, Instagram), hero banner texts, background images, and promotions banner graphics.
-* **Cross-Tab Storage Synchronizations**: Opening both the storefront and admin panel in separate browser tabs dynamically updates the storefront the split-second you click "Save" on the dashboard.
+### 1. 📊 Dashboard Overview (Quick Stats)
+Displays high-level e-commerce metrics updated in real-time as inventory or orders change:
+* **Total Products**: Count of all listings currently active in the inventory.
+* **Categories**: Number of unique, distinct product groups configured.
+* **Store Mode**: Active display currency code and current store name mapping.
+* **Total Orders**: Number of order checkout logs captured from customer purchases.
+
+---
+
+### 2. 📦 Products Manager Panel
+A complete inventory dashboard with full CRUD (Create, Read, Update, Delete) capability:
+* **Search Bar**: Live filters products immediately by title, description, or category.
+* **Add New Product Form**: Opens a sliding modal container with the following fields:
+  * **Product Title**: The primary name of the product.
+  * **Category**: A dynamic text input. Typing a category name that does not exist will automatically register it and generate a new menu tab on the storefront. Existing categories appear as dropdown datalist autocomplete options.
+  * **Star Rating**: Sets rating visual stars (1 to 5 stars) shown on product cards.
+  * **Selling Price**: The price charged to the customer.
+  * **Original Price (Optional)**: If entered higher than the selling price, it automatically adds a **"Sale" badge** on the storefront and renders a strikethrough price tag.
+  * **Product Image URL**: Direct link to the hosted image asset (Imgur, Postimages, or ImgBB direct links).
+  * **Description**: Detailed product features and specifications.
+  * **Stock Status**: Toggles between `In Stock` (active shopping cart buttons) and `Out of Stock` (grayed out cart buttons).
+* **Edit Button (Pencil Icon)**: Loads selected product details back into the modal for modification.
+* **Delete Button (Trash Icon)**: Triggers a safety confirmation prompt before deleting the product from local databases.
+
+---
+
+### 3. 📋 Orders Manager Panel
+Stores customer transactions submitted on checkout prior to WhatsApp dispatch:
+* **Real-time Capture**: When a customer clicks **Send via WhatsApp** on checkout, their full order information is automatically logged to the `franklin_orders` database.
+* **Detailed Table Records**:
+  * **Order Ref & Date**: Displays unique reference codes (e.g. `ORD-4927`) and timestamps.
+  * **Customer Info**: Lists Customer Name, Phone number, Delivery address, and custom checkout notes.
+  * **Items Ordered**: Renders nested bullet lists containing item quantities, product names, and pricing.
+  * **Total Cost**: Auto-computes total sums using current currency symbols.
+  * **Status Badge**: Displays `Pending` (amber) or `Completed` (emerald) tags.
+* **Status Toggler (Checkmark Icon)**: Instantly toggles order statuses between *Pending* and *Completed* to track shipments.
+* **Delete Record (Trash Icon)**: Removes completed order histories from dashboard storage.
+
+---
+
+### 4. 🛠️ Store Settings Panel
+Enables the merchant to re-brand the storefront at any time without touch coding:
+* **General Settings**:
+  * *Store Name*: Changes store name in headings, titles, and SEO tags.
+  * *Currency Symbol*: Updates symbols (`₦`, `$`, `€`, `£`) across all checkout drawers, product tags, and logs.
+  * *Store Logo URL*: Instantly overrides header, footer, and admin logos.
+  * *Footer About Description*: Main text printed in the footer Column 1 biography.
+* **Hero Banner Settings**:
+  * *Hero Background URL*: Image displayed behind the main intro storefront section.
+  * *Heading & Subtitles*: Main slogan headers.
+  * *Promo Tag & Warranty Line*: Custom text badges.
+* **Merchant Support Contacts**:
+  * *WhatsApp Phone Number*: Number used for checkout forwards (must be international format).
+  * *Alternative Phone / Support Line*: Renders as a second contact number inside the footer.
+  * *Support Email*: Primary contact email address.
+  * *Facebook & Instagram URLs*: Social link icons update dynamically.
+* **Dashboard Security Settings**:
+  * *Security Passcode*: Paste a custom string to change your dashboard access passcode lock dynamically.
 
 ---
 
@@ -39,21 +85,17 @@ To manage products and store configurations, navigate to the dashboard folder:
 ```bash
 Franklin/
 ├── admin/
-│   ├── index.html     # Admin dashboard layouts
-│   ├── admin.css      # Dark-themed dashboard styling
-│   └── admin.js       # Admin CRUD controllers & login locks
+│   ├── index.html     # Admin dashboard markup and forms layouts
+│   ├── admin.css      # Modern dark-themed dashboard styling
+│   └── admin.js       # Admin CRUD controllers & security access session logic
 ├── assets/            # Static high-quality branding graphics
-│   ├── logo.png       # Generated logo
+│   ├── logo.png       # Store logo
 │   ├── hero.jpg       # Hero banner background
-│   ├── promo.jpg      # Centers promo phone mockup
-│   ├── product_slicer.jpg
-│   ├── product_juicer.jpg
-│   ├── product_cutter.jpg
-│   └── product_popcorn.jpg
+│   └── promo.jpg      # Centers promo phone mockup graphic
 ├── index.html         # Customer storefront landing
-├── style.css          # Storefront design system & mobile queries
-├── store.js           # Storefront cart operations & order dispatcher
-└── README.md          # Project documentation
+├── style.css          # Storefront layout design system & mobile media queries
+├── store.js           # Storefront dynamic navigation, cart operations & order dispatcher
+└── README.md          # Project manual documentation
 ```
 
 ---
@@ -61,11 +103,11 @@ Franklin/
 ## 🛠️ Setup & Operations Guide
 
 ### Running Locally
-1. Clone or download the directory to your computer.
-2. Double-click the main [index.html](file:///c:/Users/SirBill's/Desktop/Franklin/index.html) to boot the customer storefront.
-3. To access settings, scroll to the bottom right and click the gear icon link **Merchant Dashboard** (or open [admin/index.html](file:///c:/Users/SirBill's/Desktop/Franklin/admin/index.html) in your browser).
-4. Enter `franklin2026` to unlock control options.
+1. Clone or download this directory to your local drive.
+2. Double-click the main [index.html](file:///c:/Users/SirBill's/Desktop/Franklin/index.html) to open the customer storefront.
+3. Scroll to the bottom right of the storefront page and click **Merchant Dashboard** (or navigate to `/admin/index.html` in your browser).
+4. Enter passcode `franklin2026` to unlock admin console options.
 
-### Live Deployments (Free & Fast)
-* **Netlify Drop**: Go to [Netlify Drop](https://app.netlify.com/drop) and drag the entire `/Franklin` directory into the upload box. Your site goes live on a public URL in 5 seconds.
-* **Surge CLI**: Open a terminal in the folder directory and run `npx surge .` to deploy to a custom subdomain instantly.
+### Live Deployments
+* **Netlify Drop (Easiest)**: Drag and drop the `/Franklin` folder directly into [Netlify Drop](https://app.netlify.com/drop) to publish your live website in 5 seconds.
+* **GitHub Integration**: Link your repository to Netlify or Vercel. Pushing updates will automatically build and publish your latest storefront edits.
