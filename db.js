@@ -1,21 +1,21 @@
 // Global Default Seed Database - Shared by Storefront and Admin Dashboard
 const DEFAULT_SETTINGS = {
-    storeName: "franklinstore",
+    storeName: "shopmart",
     currency: "₦",
     logo: "assets/logo.png",
     heroBg: "assets/hero.jpg",
-    heroTitle: "Franklin Store",
-    heroSubtitle: "It has finally started...",
+    heroTitle: "Shopmart",
+    heroSubtitle: "Smart Shopping, Better Living",
     heroTag: "Huge Sales up to 50% Off",
     heroWarranty: "Plus ONE YEAR WARRANTY",
     promoBanner: "assets/promo.jpg",
     supportWhatsapp: "+2348000000000",
     supportPhoneAlt: "+2348099999999",
-    supportEmail: "support@franklinstore.com",
-    facebookUrl: "https://facebook.com/franklinstore",
-    instagramUrl: "https://instagram.com/franklinstore",
+    supportEmail: "support@shopmart.com",
+    facebookUrl: "https://facebook.com/shopmart",
+    instagramUrl: "https://instagram.com/shopmart",
     adminPasscode: "franklin2026",
-    description: "Welcome to Franklin Store, your one-stop destination for high-quality products that cater to your everyday needs. We pride ourselves on offering exceptional value, unbeatable deals, and a seamless shopping experience. From fresh groceries to trendy items, we are committed to delivering the best to your doorstep."
+    description: "Welcome to Shopmart, your one-stop destination for high-quality products that cater to your everyday needs. We pride ourselves on offering exceptional value, unbeatable deals, and a seamless shopping experience. From fresh groceries to trendy items, we are committed to delivering the best to your doorstep."
 };
 
 const DEFAULT_PRODUCTS = [

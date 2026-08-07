@@ -11,25 +11,25 @@ let activeDetailProduct = null;
 // Initialize Store Database
 function initStore() {
     // 1. Fetch settings
-    const savedSettings = localStorage.getItem("franklin_settings");
+    const savedSettings = localStorage.getItem("shopmart_settings");
     if (!savedSettings) {
-        localStorage.setItem("franklin_settings", JSON.stringify(DEFAULT_SETTINGS));
+        localStorage.setItem("shopmart_settings", JSON.stringify(DEFAULT_SETTINGS));
         settings = { ...DEFAULT_SETTINGS };
     } else {
         settings = JSON.parse(savedSettings);
     }
 
     // 2. Fetch products
-    const savedProducts = localStorage.getItem("franklin_products");
+    const savedProducts = localStorage.getItem("shopmart_products");
     if (!savedProducts) {
-        localStorage.setItem("franklin_products", JSON.stringify(DEFAULT_PRODUCTS));
+        localStorage.setItem("shopmart_products", JSON.stringify(DEFAULT_PRODUCTS));
         products = [...DEFAULT_PRODUCTS];
     } else {
         products = JSON.parse(savedProducts);
     }
 
     // 3. Fetch Cart
-    const savedCart = localStorage.getItem("franklin_cart");
+    const savedCart = localStorage.getItem("shopmart_cart");
     if (savedCart) {
         cart = JSON.parse(savedCart);
     }
@@ -275,7 +275,7 @@ function removeCartItem(productId) {
 }
 
 function saveCart() {
-    localStorage.setItem("franklin_cart", JSON.stringify(cart));
+    localStorage.setItem("shopmart_cart", JSON.stringify(cart));
 }
 
 function updateCartUI() {
@@ -482,7 +482,7 @@ document.getElementById("checkout-submission-form").addEventListener("submit", (
     });
 
     // Save order data to local storage for Admin Dashboard Order Manager
-    const savedOrdersStr = localStorage.getItem("franklin_orders");
+    const savedOrdersStr = localStorage.getItem("shopmart_orders");
     let storeOrders = [];
     if (savedOrdersStr) {
         try {
@@ -503,7 +503,7 @@ document.getElementById("checkout-submission-form").addEventListener("submit", (
         status: "pending"
     };
     storeOrders.push(newOrder);
-    localStorage.setItem("franklin_orders", JSON.stringify(storeOrders));
+    localStorage.setItem("shopmart_orders", JSON.stringify(storeOrders));
 
     // Format text message
     let whatsappMsg = `*NEW ORDER - ${settings.storeName.toUpperCase()}*\n`;
@@ -546,7 +546,7 @@ document.getElementById("checkout-submission-form").addEventListener("submit", (
 
 // Watch local storage modifications in real time (if user edits inside dashboard and returns to store)
 window.addEventListener("storage", (e) => {
-    if (e.key === "franklin_settings" || e.key === "franklin_products") {
+    if (e.key === "shopmart_settings" || e.key === "shopmart_products") {
         initStore();
     }
 });

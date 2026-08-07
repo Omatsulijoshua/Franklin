@@ -8,27 +8,27 @@ let orders = [];
 // Initialize state
 function init() {
     // Check if products exist in localStorage
-    const savedProducts = localStorage.getItem("franklin_products");
+    const savedProducts = localStorage.getItem("shopmart_products");
     if (!savedProducts) {
-        localStorage.setItem("franklin_products", JSON.stringify(DEFAULT_PRODUCTS));
+        localStorage.setItem("shopmart_products", JSON.stringify(DEFAULT_PRODUCTS));
         products = [...DEFAULT_PRODUCTS];
     } else {
         products = JSON.parse(savedProducts);
     }
 
     // Check if settings exist in localStorage
-    const savedSettings = localStorage.getItem("franklin_settings");
+    const savedSettings = localStorage.getItem("shopmart_settings");
     if (!savedSettings) {
-        localStorage.setItem("franklin_settings", JSON.stringify(DEFAULT_SETTINGS));
+        localStorage.setItem("shopmart_settings", JSON.stringify(DEFAULT_SETTINGS));
         settings = { ...DEFAULT_SETTINGS };
     } else {
         settings = JSON.parse(savedSettings);
     }
 
     // Check if orders exist in localStorage
-    const savedOrders = localStorage.getItem("franklin_orders");
+    const savedOrders = localStorage.getItem("shopmart_orders");
     if (!savedOrders) {
-        localStorage.setItem("franklin_orders", JSON.stringify([]));
+        localStorage.setItem("shopmart_orders", JSON.stringify([]));
         orders = [];
     } else {
         orders = JSON.parse(savedOrders);
@@ -37,9 +37,9 @@ function init() {
 
 // Save state to localStorage
 function saveState() {
-    localStorage.setItem("franklin_products", JSON.stringify(products));
-    localStorage.setItem("franklin_settings", JSON.stringify(settings));
-    localStorage.setItem("franklin_orders", JSON.stringify(orders));
+    localStorage.setItem("shopmart_products", JSON.stringify(products));
+    localStorage.setItem("shopmart_settings", JSON.stringify(settings));
+    localStorage.setItem("shopmart_orders", JSON.stringify(orders));
     updateCategoriesDatalist();
 }
 
