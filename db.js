@@ -1,0 +1,275 @@
+// Global Default Seed Database - Shared by Storefront and Admin Dashboard
+const DEFAULT_SETTINGS = {
+    storeName: "franklinstore",
+    currency: "₦",
+    logo: "assets/logo.png",
+    heroBg: "assets/hero.jpg",
+    heroTitle: "Franklin Store",
+    heroSubtitle: "It has finally started...",
+    heroTag: "Huge Sales up to 50% Off",
+    heroWarranty: "Plus ONE YEAR WARRANTY",
+    promoBanner: "assets/promo.jpg",
+    supportWhatsapp: "+2348000000000",
+    supportPhoneAlt: "+2348099999999",
+    supportEmail: "support@franklinstore.com",
+    facebookUrl: "https://facebook.com/franklinstore",
+    instagramUrl: "https://instagram.com/franklinstore",
+    adminPasscode: "franklin2026",
+    description: "Welcome to Franklin Store, your one-stop destination for high-quality products that cater to your everyday needs. We pride ourselves on offering exceptional value, unbeatable deals, and a seamless shopping experience. From fresh groceries to trendy items, we are committed to delivering the best to your doorstep."
+};
+
+const DEFAULT_PRODUCTS = [
+    {
+        id: "prod-1",
+        name: "Electric Popcorn Maker",
+        category: "Kitchen Items",
+        rating: 5,
+        price: 25000,
+        originalPrice: 35000,
+        image: "assets/product_popcorn.jpg",
+        description: "Hot air popcorn popper machine. Prepares oil-free healthy snacks in under 3 minutes with high popcorn yield rates.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-2",
+        name: "Mandolin Slicer & Chopper",
+        category: "Kitchen Items",
+        rating: 4,
+        price: 18000,
+        originalPrice: 24000,
+        image: "assets/product_slicer.jpg",
+        description: "Multi-blade vegetable slicer, shredder and grater tool with hand guards. Essential tool to speed up meal prepping.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-3",
+        name: "Centrifugal Juice Extractor",
+        category: "Kitchen Items",
+        rating: 5,
+        price: 45000,
+        originalPrice: 60000,
+        image: "assets/product_juicer.jpg",
+        description: "Powerful high-speed electric juicer machine with wide mouth feed chute. Extracts pulp-free vitamins from fruits & veggies.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-4",
+        name: "Multipurpose Electric Cleaver",
+        category: "Kitchen Items",
+        rating: 4,
+        price: 32000,
+        originalPrice: 40000,
+        image: "assets/product_cutter.jpg",
+        description: "Heavy-duty electric kitchen cutter and bone saw tool. Cuts through frozen meat, bones and tough foods cleanly.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-5",
+        name: "Non-Stick Waffle Maker",
+        category: "Kitchen Items",
+        rating: 5,
+        price: 20000,
+        originalPrice: 28000,
+        image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=600&auto=format&fit=crop",
+        description: "Compact double-sided heating waffle iron maker. Non-stick plates ensure easy release and rapid cleanups.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-6",
+        name: "Stainless Steel Electric Kettle",
+        category: "Kitchen Items",
+        rating: 4,
+        price: 15000,
+        originalPrice: 22000,
+        image: "https://images.unsplash.com/photo-1594051808688-7f6ff98d279b?q=80&w=600&auto=format&fit=crop",
+        description: "1.7L rapid boil hot water electric kettle with automatic shutoff and boil-dry safety protection indicators.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-7",
+        name: "Smoothie Blender & Mixer",
+        category: "Kitchen Items",
+        rating: 5,
+        price: 22000,
+        originalPrice: 30000,
+        image: "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?q=80&w=600&auto=format&fit=crop",
+        description: "Personal bullet size high speed blender cup. Blends nutritious green smoothies and milkshakes within 30 seconds.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-8",
+        name: "Aroma Diffuser & Nebulizer",
+        category: "Household Products",
+        rating: 4,
+        price: 15000,
+        originalPrice: 20000,
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=600&auto=format&fit=crop",
+        description: "Quiet ultrasonic cool mist humidifier and aromatherapy oil diffuser with warm ambient night light controls.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-9",
+        name: "Ultrasonic Air Humidifier",
+        category: "Household Products",
+        rating: 5,
+        price: 18000,
+        originalPrice: 24000,
+        image: "https://images.unsplash.com/photo-1519183071298-a2962feb14f4?q=80&w=600&auto=format&fit=crop",
+        description: "Cool mist humidifier with an auto-off safety function and color-changing LED nightlight. Quiet operation suitable for bedrooms.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-10",
+        name: "Rechargeable LED Desk Lamp",
+        category: "Household Products",
+        rating: 4,
+        price: 12000,
+        originalPrice: 15000,
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=600&auto=format&fit=crop",
+        description: "Flexible gooseneck reading table lamp with touch controls and adjustable brightness levels. Energy efficient eye-care LED beads.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-11",
+        name: "Premium Microfiber Mop",
+        category: "Household Products",
+        rating: 4,
+        price: 14000,
+        originalPrice: 20000,
+        image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=600&auto=format&fit=crop",
+        description: "Flat squeeze floor mop with dry-use dusting and wet-use scrubbing microfiber pads. 360 swivel head for cleaning tight wall angles.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-12",
+        name: "Wireless ANC Earbuds",
+        category: "Electronic Gadgets",
+        rating: 5,
+        price: 35000,
+        originalPrice: 50000,
+        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=600&auto=format&fit=crop",
+        description: "True wireless earbuds featuring active noise cancellation, deep bass response, and 30-hour battery life with charging case.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-13",
+        name: "Smart Fitness Watch",
+        category: "Electronic Gadgets",
+        rating: 4,
+        price: 40000,
+        originalPrice: 55000,
+        image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?q=80&w=600&auto=format&fit=crop",
+        description: "Waterproof fitness tracker watch monitoring heart rate, oxygen, daily steps, and workout activities. Seamless syncs with iOS & Android.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-14",
+        name: "Portable Bluetooth Speaker",
+        category: "Electronic Gadgets",
+        rating: 5,
+        price: 28000,
+        originalPrice: 38000,
+        image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?q=80&w=600&auto=format&fit=crop",
+        description: "Rugged waterproof outdoor speaker with dual drivers for crystal clear treble and deep punchy bass. 12-hour continuous music playback.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-15",
+        name: "Mini LED Projector",
+        category: "Electronic Gadgets",
+        rating: 4,
+        price: 95000,
+        originalPrice: 130000,
+        image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=600&auto=format&fit=crop",
+        description: "1080P supported home theater movie projector. Connects via HDMI or USB, built-in dual speakers, adjustable zoom focal lens.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-16",
+        name: "Carbon Fiber Helmet",
+        category: "Moto Spare Parts",
+        rating: 5,
+        price: 65000,
+        originalPrice: 80000,
+        image: "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?q=80&w=600&auto=format&fit=crop",
+        description: "Ultra-lightweight aerodynamic carbon fiber motorcycle helmet. High impact safety rated, with dual anti-fog visors.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-17",
+        name: "Performance Spark Plugs (Pack of 4)",
+        category: "Moto Spare Parts",
+        rating: 4,
+        price: 12000,
+        originalPrice: 15000,
+        image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=600&auto=format&fit=crop",
+        description: "Laser iridium spark plugs for optimal ignition performance, improved fuel efficiency, and rapid throttle response.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-18",
+        name: "Heavy Duty Gold Drive Chain",
+        category: "Moto Spare Parts",
+        rating: 5,
+        price: 18000,
+        originalPrice: 24000,
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=600&auto=format&fit=crop",
+        description: "Reinforced O-ring drive chain for high-performance motorbikes. Highly corrosion-resistant with premium gold links.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-19",
+        name: "Ceramic Brake Pads Set",
+        category: "Moto Spare Parts",
+        rating: 4,
+        price: 10000,
+        originalPrice: 13000,
+        image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600&auto=format&fit=crop",
+        description: "Low-dust ceramic brake pads for superior stopping power, quiet braking comfort, and extended rotor wear-life.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-20",
+        name: "Performance Engine Air Filter",
+        category: "Cars Spare Parts",
+        rating: 5,
+        price: 15000,
+        originalPrice: 20000,
+        image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=600&auto=format&fit=crop",
+        description: "High-flow washable engine cold air intake filter. Improves horsepower, torque, and throttle response.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-21",
+        name: "LED Headlight Conversion Kit (H7)",
+        category: "Cars Spare Parts",
+        rating: 4,
+        price: 28000,
+        originalPrice: 35000,
+        image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop",
+        description: "Super bright LED headlight bulbs conversion kit. 12000 lumens, 6500K cool white, IP67 waterproof rating.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-22",
+        name: "Brembo Ceramic Brake Discs (Pair)",
+        category: "Cars Spare Parts",
+        rating: 5,
+        price: 95000,
+        originalPrice: 120000,
+        image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=600&auto=format&fit=crop",
+        description: "Drilled and slotted performance front brake rotors for maximum heat dissipation and thermal comfort.",
+        status: "in_stock"
+    },
+    {
+        id: "prod-23",
+        name: "OBD2 Engine Scanner Diagnostic Tool",
+        category: "Cars Spare Parts",
+        rating: 4,
+        price: 18000,
+        originalPrice: 25000,
+        image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600&auto=format&fit=crop",
+        description: "Universal car OBD2 code reader diagnostic scanner. Quickly reads and clears engine trouble codes.",
+        status: "in_stock"
+    }
+];

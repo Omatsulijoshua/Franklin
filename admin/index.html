@@ -369,6 +369,30 @@
                         </div>
                     </div>
 
+                    <div class="settings-section-card">
+                        <h2>
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Export Code for Global Deployment
+                        </h2>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.4;">
+                            Since this website runs completely serverless (without a backend server), changes you make in this dashboard are saved in your current browser's local storage.
+                            To publish your customized products, categories, and settings permanently so that <strong>all customers worldwide</strong> can see them:
+                        </p>
+                        <div>
+                            <button type="button" class="btn btn-secondary" id="btn-export-db" style="display:inline-flex; align-items:center; gap:0.5rem; background-color:rgba(59, 130, 246, 0.15); color:#60a5fa; border:1px solid rgba(59, 130, 246, 0.3);">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Download Updated db.js File
+                            </button>
+                        </div>
+                        <span class="form-help" style="margin-top: 0.5rem; display: block; color: var(--text-muted);">
+                            After downloading, replace the old <strong>db.js</strong> file in your project folder with this new one, commit, and push to GitHub!
+                        </span>
+                    </div>
+
                     <div class="settings-save-bar">
                         <button type="submit" class="btn btn-primary">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
@@ -464,6 +488,7 @@
     <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="toast-container"></div>
 
+    <script src="../db.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
