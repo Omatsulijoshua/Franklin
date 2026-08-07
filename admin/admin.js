@@ -295,6 +295,11 @@ function loadSettingsForm() {
     document.getElementById("settings-link-facebook").value = settings.facebookUrl || "";
     document.getElementById("settings-link-instagram").value = settings.instagramUrl || "";
     document.getElementById("settings-admin-passcode").value = settings.adminPasscode || "franklin2026";
+
+    // GitHub Settings
+    document.getElementById("settings-github-repo").value = settings.githubRepo || "";
+    document.getElementById("settings-github-branch").value = settings.githubBranch || "main";
+    document.getElementById("settings-github-token").value = settings.githubToken || "";
 }
 
 // Tab Switching
@@ -472,6 +477,11 @@ document.getElementById("settings-form").addEventListener("submit", (e) => {
     settings.instagramUrl = document.getElementById("settings-link-instagram").value;
     settings.adminPasscode = document.getElementById("settings-admin-passcode").value;
 
+    // GitHub Settings
+    settings.githubRepo = document.getElementById("settings-github-repo").value;
+    settings.githubBranch = document.getElementById("settings-github-branch").value;
+    settings.githubToken = document.getElementById("settings-github-token").value;
+
     saveState();
     renderDashboard();
     showToast("Branding settings saved successfully!");
@@ -526,6 +536,88 @@ const DEFAULT_PRODUCTS = ${JSON.stringify(products, null, 4)};
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             showToast("db.js file exported successfully! Replace the file in your folder and push to Git.");
+        });
+    }
+
+    // Hook up GitHub Push button click listener
+    const pushBtn = document.getElementById("btn-push-github");
+    if (pushBtn) {
+        pushBtn.addEventListener("click", async () => {
+            const token = settings.githubToken;
+            const repo = settings.githubRepo;
+            const branch = settings.githubBranch || "main";
+            
+            if (!token || !repo) {
+                showToast("Please configure your GitHub Repository and Token in Settings first!", "error");
+                document.querySelector(".nav-item[data-tab='settings']").click();
+                return;
+            }
+            
+            pushBtn.disabled = true;
+            pushBtn.textContent = "Pushing to GitHub...";
+            
+            try {
+                const dbContent = `// Global Default Seed Database - Shared by Storefront and Admin Dashboard
+const DEFAULT_SETTINGS = ${JSON.stringify(settings, null, 4)};
+
+const DEFAULT_PRODUCTS = ${JSON.stringify(products, null, 4)};
+`;
+                
+                // Fetch file SHA first (needed by GitHub API to update existing content)
+                const url = `https://api.github.com/repos/${repo}/contents/db.js?ref=${branch}`;
+                const headers = {
+                    "Authorization": `token ${token}`,
+                    "Accept": "application/vnd.github.v3+json"
+                };
+                
+                let sha = "";
+                const getFileRes = await fetch(url, { headers });
+                if (getFileRes.ok) {
+                    const fileData = await getFileRes.json();
+                    sha = fileData.sha;
+                } else if (getFileRes.status !== 404) {
+                    throw new Error(`Failed to fetch file details (Status: ${getFileRes.status})`);
+                }
+                
+                // Perform commit PUT
+                const putUrl = `https://api.github.com/repos/${repo}/contents/db.js`;
+                const putBody = {
+                    message: "Update default database (db.js) from Admin Console Dashboard",
+                    content: btoa(unescape(encodeURIComponent(dbContent))),
+                    branch: branch
+                };
+                if (sha) {
+                    putBody.sha = sha;
+                }
+                
+                const putRes = await fetch(putUrl, {
+                    method: "PUT",
+                    headers: {
+                        ...headers,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(putBody)
+                });
+                
+                if (putRes.ok) {
+                    showToast("Pushed successfully! Netlify will update in a few seconds.");
+                } else {
+                    const errorData = await putRes.json();
+                    throw new Error(errorData.message || "Push request failed.");
+                }
+                
+            } catch(err) {
+                console.error(err);
+                showToast(`GitHub Publish Failed: ${err.message}`, "error");
+            } finally {
+                pushBtn.disabled = false;
+                pushBtn.innerHTML = `
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                    Push to GitHub Live
+                `;
+            }
         });
     }
 });
