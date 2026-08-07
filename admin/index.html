@@ -404,13 +404,10 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="prod-category">Category</label>
-                            <select id="prod-category" required>
-                                <option value="Household Products">Household Products</option>
-                                <option value="Kitchen Items">Kitchen Items</option>
-                                <option value="Electronic Gadgets">Electronic Gadgets</option>
-                                <option value="Moto Spare Parts">Moto Spare Parts</option>
-                                <option value="Cars Spare Parts">Cars Spare Parts</option>
-                            </select>
+                            <input type="text" id="prod-category" required list="categories-datalist" placeholder="e.g. Moto Spare Parts">
+                            <datalist id="categories-datalist">
+                                <!-- Populated dynamically via admin.js -->
+                            </datalist>
                         </div>
                         <div class="form-group">
                             <label for="prod-rating">Star Rating (1 - 5)</label>

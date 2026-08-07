@@ -314,6 +314,14 @@ function saveState() {
     localStorage.setItem("franklin_products", JSON.stringify(products));
     localStorage.setItem("franklin_settings", JSON.stringify(settings));
     localStorage.setItem("franklin_orders", JSON.stringify(orders));
+    updateCategoriesDatalist();
+}
+
+function updateCategoriesDatalist() {
+    const datalist = document.getElementById("categories-datalist");
+    if (!datalist) return;
+    const categories = Array.from(new Set(products.map(p => p.category))).filter(Boolean);
+    datalist.innerHTML = categories.map(cat => `<option value="${cat}"></option>`).join("");
 }
 
 // Toast System
@@ -771,5 +779,6 @@ window.addEventListener("DOMContentLoaded", () => {
     
     renderDashboard();
     renderProductsTable();
+    updateCategoriesDatalist();
 });
 

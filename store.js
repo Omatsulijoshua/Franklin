@@ -309,8 +309,40 @@ function initStore() {
     }
 
     applyBranding();
+    renderCategoriesNav();
     renderProductsGrid();
     updateCartUI();
+}
+
+function renderCategoriesNav() {
+    const nav = document.getElementById("store-categories-nav");
+    if (!nav) return;
+    
+    // Retrieve unique categories present in the products catalog
+    const categories = Array.from(new Set(products.map(p => p.category))).filter(Boolean);
+    
+    let html = `<li><span class="nav-link ${currentCategory === 'all' ? 'active' : ''}" data-category="all">Shop</span></li>`;
+    categories.forEach(cat => {
+        html += `<li><span class="nav-link ${currentCategory === cat ? 'active' : ''}" data-category="${cat}">${cat}</span></li>`;
+    });
+    nav.innerHTML = html;
+    
+    // Attach click filters to the generated nav elements
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", (e) => {
+            document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+
+            currentCategory = e.currentTarget.getAttribute("data-category");
+            renderProductsGrid();
+            
+            // Auto scroll to collection if viewport is low
+            const heading = document.getElementById("category-heading-text");
+            if (heading) {
+                heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 }
 
 
@@ -678,22 +710,7 @@ document.getElementById("modal-add-cart-btn").addEventListener("click", () => {
     }
 });
 
-// Category Tab Filters
-document.querySelectorAll(".nav-link").forEach(link => {
-    link.addEventListener("click", (e) => {
-        document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("active"));
-        e.currentTarget.classList.add("active");
-
-        currentCategory = e.currentTarget.getAttribute("data-category");
-        renderProductsGrid();
-        
-        // Auto scroll to collection if viewport is low
-        const heading = document.getElementById("category-heading-text");
-        if (heading) {
-            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
-});
+// Dynamic Category Filters are handled inside renderCategoriesNav()
 
 // Shop CTA button scroll
 document.getElementById("hero-cta-btn").addEventListener("click", () => {
