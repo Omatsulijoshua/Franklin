@@ -43,6 +43,32 @@ A complete inventory dashboard with full CRUD (Create, Read, Update, Delete) cap
 * **Edit Button (Pencil Icon)**: Loads selected product details back into the modal for modification.
 * **Delete Button (Trash Icon)**: Triggers a safety confirmation prompt before deleting the product from local databases.
 
+#### 📷 How to Upload Images and Get Direct Links
+Since this storefront is serverless, you need to host your images online and paste their **Direct URLs** into the *Product Image URL* field. Here are the easiest methods:
+
+##### Method 1: Using Postimages (Recommended - Quickest & No Account Required)
+1. Go to **[postimages.org](https://postimages.org/)**.
+2. Click the **Choose images** button and upload your product photo.
+3. Once the upload completes, a list of link boxes will appear.
+4. **Copy the link inside the "Direct Link" row** (it will look like: `https://i.postimg.cc/abc123xy/product-name.jpg`).
+
+> [!IMPORTANT]
+> Always copy the **Direct Link**. If you copy the standard "Link" or "Markdown Link", it points to a web page displaying the image rather than the raw image file itself, which will cause a broken image icon on the storefront.
+
+##### Method 2: Using ImgBB (Simple & Free Account option)
+1. Go to **[imgbb.com](https://imgbb.com/)**.
+2. Click **Start Uploading**, choose your photo, and click **Upload**.
+3. Once uploaded, open the dropdown menu below the image (by default it says "Viewer links").
+4. Select **Direct links** from the list.
+5. Copy the generated URL (it will look like: `https://i.ibb.co/abc123xy/product-name.png`).
+
+##### 🔍 How to check if your image link is correct:
+Before pasting the link into your admin panel:
+1. Open a new tab in your browser.
+2. Paste the image link and press **Enter**.
+3. **Correct link**: You should see *only the raw image file* on a clean background (the browser url bar will end in `.jpg`, `.jpeg`, `.png`, or `.webp`).
+4. **Incorrect link**: If you see headers, logos, buttons, or website text around the image (e.g. imgur or postimages brand website), it is a viewer webpage link. Go back and copy the direct link.
+
 ---
 
 ### 3. 📋 Orders Manager Panel
